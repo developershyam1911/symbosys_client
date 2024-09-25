@@ -1,0 +1,39 @@
+
+.content-section {
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .content-section h2 {
+    text-align: center;
+    color: #dc3545;
+    margin-bottom: 40px;
+    text-decoration: underline;
+  }
+  .content-section img {
+    display: block;
+    margin: 20px auto;
+  }
+
+  .custom-section {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    background: linear-gradient(0deg, #e39ba8, transparent);
+
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 8px;
+  }
+  .text-content {
+    flex: 1;
+  }
+  .image-content {
+    flex: 1;
+    text-align: center;
+  }
+  .image-content img {
+    max-width: 100%;
+    height: auto;
+  }
