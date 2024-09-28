@@ -59,7 +59,7 @@
   
       .slide-content {
         font-size: 12px; /* टेक्स्ट का फॉन्ट साइज छोटा किया */
-        margin-top: -100px; /* टेक्स्ट को आइकन के ऊपर स्थानित किया */
+        margin-top: -100px; 
         color: black;
         font-weight: bold;
         text-align: center;
@@ -885,7 +885,7 @@
     .navbar-toggler {
     position: absolute;
     right: 12px; /* Toggle button ko right side par fix karne ke liye */
-    top: 20px; /* Aap top se bhi distance set kar sakte hain */
+    top: 5px; /* Aap top se bhi distance set kar sakte hain */
     z-index: 2; /* Toggle button ko upar rakhne ke liye */
   }
   
@@ -937,7 +937,9 @@
       overflow: hidden;
       z-index: -2; /* Video behind the slider content */
     }
-    
+    a{
+      text-decoration: none;
+    }
     .video-bg {
       min-width: 100%;
       min-height: 80%;

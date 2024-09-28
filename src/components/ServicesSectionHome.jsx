@@ -49,7 +49,7 @@ const ServiceSectionHome = () => {
               />
               <div className="card-body">
                 <h5 className="card-title">{service.title}</h5>
-                <p className="card-text">{service.text}</p>
+                <p className="card-text text-dark">{service.text}</p>
                 <a href={service.link} className="btn btn-warning">
                   Read more →
                 </a>
@@ -90,7 +90,7 @@ const ServiceSectionHome = () => {
               />
               <div className="card-body">
                 <h5 className="card-title">{service.title}</h5>
-                <p className="card-text">{service.text}</p>
+                <p className="card-text text-dark">{service.text}</p>
                 <a href={service.link} className="btn btn-warning">
                   Read more →
                 </a>
@@ -131,7 +131,7 @@ const ServiceSectionHome = () => {
               />
               <div className="card-body">
                 <h5 className="card-title">{service.title}</h5>
-                <p className="card-text">{service.text}</p>
+                <p className="card-text text-dark">{service.text}</p>
                 <a href={service.link} className="btn btn-warning">
                   Read more →
                 </a>

@@ -58,11 +58,11 @@ const Slider = () => {
       description: "Thousands of successful business",
     },
     {
-      value: 120,
+      value: 95,
       description: "Total clients who love HighTech",
     },
     {
-      value: 5,
+      value: 52,
       description: "Stars reviews given by satisfied clients",
     },
   ]);
@@ -140,25 +140,34 @@ const Slider = () => {
           <div className="row">
             {counters.map((counter, index) => (
               <div
-                className="col-lg-3 wow fadeIn"
+                className="col-lg-3 col-md-6 col-sm-12 wow fadeIn"
                 data-wow-delay={`${index * 0.2}s`}
                 key={index}
+                style={{ marginBottom: "20px" }}
               >
                 <div className="d-flex counter">
-                  <h1 className="me-3 text-primary">{counter.value}</h1>
-                  <h5 className="text-white mt-1">{counter.description}</h5>
+                  <h1
+                    className="me-3 text-primary"
+                    style={{ fontSize: "24px" }} // Adjust font size for mobile
+                  >
+                    {counter.value}
+                  </h1>
+                  <h5 className="text-white mt-1 counter-description ">
+                    {counter.description}
+                  </h5>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
       <section className="warning-notice">
         <div className="container-fluid p-0">
           <div className="row no-gutters">
             <div
               className="col-12 col-md-2 d-flex justify-content-center align-items-center"
-              style={{ backgroundColor: "#cc0108" }}
+              style={{ backgroundColor: "#cc0108", padding: "10px" }}
             >
               <button
                 className="btn-block mt-2"
@@ -166,7 +175,8 @@ const Slider = () => {
                   backgroundColor: "#cc0108",
                   color: "white",
                   border: "none",
-                  fontSize: "18px",
+                  fontSize: "16px", // Adjust button size for mobile
+                  width: "100%",
                 }}
               >
                 Services
@@ -182,10 +192,10 @@ const Slider = () => {
                     style={{
                       marginBottom: "5px",
                       fontWeight: "600",
-                      paddingTop: "12px",
+                      padding: "12px",
                       color: "#e0e0e0",
                       textAlign: "center",
-                      fontSize: "15px",
+                      fontSize: "14px", // Smaller text for mobile
                     }}
                   >
                     "Website Designing and Development, Mobile App Development,
@@ -199,20 +209,85 @@ const Slider = () => {
           </div>
         </div>
       </section>
+
       <div className="container-fluid" style={{ padding: 0 }}>
         <div className="sliders">
           <div className="slide-tracks">
             {sliders.map((slide, index) => (
               <div key={index} className="slides">
-                <img src={slide.img} alt="Icon" />
+                <img
+                  src={slide.img}
+                  alt="Icon"
+                  style={
+                    {
+                      // width: "100px",
+                      // height: "auto",
+                      // maxWidth: "100%", // Ensures images adjust on mobile
+                    }
+                  }
+                />
                 <div className="slide-content">
-                  <p>{slide.text}</p>
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {slide.text}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Media queries for further adjustments */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .counter h1 {
+            font-size: 20px;
+          }
+
+          .counter h5 {
+            font-size: 12px;
+          }
+
+          .read-more,
+          .read-moress {
+            font-size: 12px;
+          }
+
+          .slides img {
+            width: 80px;
+          }
+          .slides {
+            height: 200px; /* स्लाइड की ऊंचाई वही रखी */
+            width: 200px;
+            flex-shrink: 0;
+            color: white;
+          }
+
+          .slides img {
+            height: 350px; /* आइकन की ऊंचाई वही रखी */
+            width: 350px; /* आइकन की चौड़ाई वही रखी */
+            object-fit: contain; /* आइकन को कंटेनर में फिट करने के लिए */
+          }
+          .counter-description {
+            fontsize: "20px";
+            whitespace: "nowrap";
+          }
+          .slide-content {
+            font-size: 12px; /* टेक्स्ट का फॉन्ट साइज छोटा किया */
+            /* margin-top: -100px; टेक्स्ट को आइकन के ऊपर स्थानित किया */
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            /* टेक्स्ट के लिए बैकग्राउंड जोड़ा ताकि वह स्पष्ट दिखे */
+            width: 100%;
+          }
+        }
+      `}</style>
     </>
   );
 };

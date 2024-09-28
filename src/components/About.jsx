@@ -98,9 +98,11 @@ const About = () => {
       </div>
       <div className="container-fluid">
         {/* Vision Section */}
-        <div className="custom-section">
+        <div className="custom-section ">
           <div className="text-content">
-            <h2 style={{ color: "red" }}>Our Vision:</h2>
+            <h2 style={{ color: "red" }} className="vision-title">
+              Our Vision:
+            </h2>
             <p
               style={{
                 marginBottom: "80px",

@@ -5,64 +5,64 @@ const Specializations = () => {
     <div className="container-fluid specializations">
       <div className="container">
         <div className="text-center mb-5">
-          <h2 style={{ color: "white" }}>
+          <h2 style={{ color: "white", textDecoration: "none" }}>
             Our team of experts is dedicated to creating software solutions that
             not only meet but exceed your expectations. Our Specializations:
           </h2>
         </div>
-        <div className="specialization-item" style={{ display: "flex" }}>
-          <div className="sidebar" style={{ flex: "1", marginRight: "20px" }}>
+        <div className="row">
+          <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
             <div
               style={{
-                borderRadius: "10%",
+                borderRadius: "10px",
                 backgroundColor: "#007bff",
                 padding: "10px",
+                marginBottom: "5px",
               }}
             >
               Enterprise Resource Planning
             </div>
             <div
               style={{
-                borderRadius: "10%",
+                borderRadius: "10px",
                 backgroundColor: "#2c1094",
                 padding: "10px",
-                marginTop: "5px",
+                marginBottom: "5px",
               }}
             >
               Supply Chain Management
             </div>
             <div
               style={{
-                borderRadius: "10%",
+                borderRadius: "10px",
                 backgroundColor: "#007bff",
                 padding: "10px",
-                marginTop: "5px",
+                marginBottom: "5px",
               }}
             >
               Human Capital Management
             </div>
             <div
               style={{
-                borderRadius: "10%",
+                borderRadius: "10px",
                 backgroundColor: "#007bff",
                 padding: "10px",
-                marginTop: "5px",
+                marginBottom: "5px",
               }}
             >
               Project Management Solution
             </div>
             <div
               style={{
-                borderRadius: "10%",
+                borderRadius: "10px",
                 backgroundColor: "#1f0b79",
                 padding: "10px",
-                marginTop: "5px",
               }}
             >
               Industry Application
             </div>
           </div>
-          <div className="content" style={{ flex: "2" }}>
+          <div className="col-lg-9 col-md-8 col-sm-12">
             <h4>Enterprise Resource Planning</h4>
             <p>
               Future-proof your business with Brightcode ERP solutions, built

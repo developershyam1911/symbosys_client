@@ -3,9 +3,11 @@ import chromo from "../assets/img/crmpro.png";
 import bg from "../assets/img/bc.jpg";
 import circle from "../assets/img/cycle.png";
 import { MdWhatsapp } from "react-icons/md";
+import "./benefits.css";
 const BenefitsSectionHome = () => {
   return (
     <>
+      <style></style>
       <div className="containercrm">
         <div className="text-contents">
           <h1 style={{ fontSize: "24px", marginBottom: "20px" }}>
@@ -96,7 +98,7 @@ const BenefitsSectionHome = () => {
       <div className="project-together-section">
         <div className="container-fluid" style={{ backgroundImage: bg }}>
           <div className="row">
-            <div className="col-md-6 text-content">
+            <div className="col-md-6 text-content mt-1">
               <h1>Let's Build Your Project Together</h1>
               <h2>
                 Collaborate with our team of experts to bring your vision to

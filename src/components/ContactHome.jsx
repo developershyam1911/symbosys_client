@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BsMap } from "react-icons/bs";
-
+import "./benefits.css";
+import { MdCall, MdLocationCity, MdMail, MdMap } from "react-icons/md";
 const ContactHome = () => {
   // State to store form input values
   const [formData, setFormData] = useState({
@@ -42,9 +43,9 @@ const ContactHome = () => {
           style={{ maxWidth: "600px" }}
         >
           <h5 className="text-primary">Get In Touch</h5>
-          <h1 className="mb-3">Contact for any query</h1>
+          <h1 className="">Contact for any query</h1>
         </div>
-        <div className="contact-detail position-relative p-5">
+        <div className="contact-detail position-relative ">
           <div className="row g-5 mb-5 justify-content-center">
             <div className="col-xl-4 col-lg-6 wow fadeIn" data-wow-delay=".3s">
               <div className="d-flex bg-light p-3 rounded">
@@ -52,7 +53,13 @@ const ContactHome = () => {
                   className="flex-shrink-0 btn-square bg-danger rounded-circle"
                   style={{ width: "64px", height: "64px" }}
                 >
-                  <i className="fas fa-map-marker-alt text-white"></i>
+                  <center>
+                    {" "}
+                    <MdLocationCity
+                      size={26}
+                      className="fa fa-envelope text-white mt-3"
+                    />
+                  </center>
                 </div>
                 <div className="ms-3">
                   <h4 className="text-primary">Address</h4>
@@ -60,7 +67,8 @@ const ContactHome = () => {
                     href="https://goo.gl/maps/Zd4BCynmTb98ivUJ6"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="h5"
+                    className="h6"
+                    style={{ textDecoration: "none" }}
                   >
                     Harmu, Ranchi
                   </a>
@@ -73,15 +81,22 @@ const ContactHome = () => {
                   className="flex-shrink-0 btn-square bg-danger rounded-circle"
                   style={{ width: "64px", height: "64px" }}
                 >
-                  <i className="fa fa-phone text-white"></i>
+                  <center>
+                    {" "}
+                    <MdCall
+                      size={26}
+                      className="fa fa-envelope text-white mt-3"
+                    />
+                  </center>
                 </div>
                 <div className="ms-3">
                   <h4 className="text-primary">Call Us</h4>
                   <a
-                    className="h5"
+                    className="h6"
                     href="tel:+919122010150"
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
                   >
                     +91 9122010150
                   </a>
@@ -94,15 +109,22 @@ const ContactHome = () => {
                   className="flex-shrink-0 btn-square bg-danger rounded-circle"
                   style={{ width: "64px", height: "64px" }}
                 >
-                  <i className="fa fa-envelope text-white"></i>
+                  <center>
+                    {" "}
+                    <MdMail
+                      size={26}
+                      className="fa fa-envelope text-white mt-3"
+                    />
+                  </center>
                 </div>
                 <div className="ms-3">
                   <h4 className="text-primary">Email Us</h4>
                   <a
-                    className="h5"
+                    className="h6"
                     href="mailto:support@symbosys.com"
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ textDecoration: "none", fontSize: "14px" }}
                   >
                     support@symbosys.com
                   </a>
@@ -113,7 +135,7 @@ const ContactHome = () => {
           <div className="row g-5">
             <div className="col-lg-6 wow fadeIn" data-wow-delay=".3s">
               <div
-                className="p-5 h-100 rounded contact-map"
+                className="p-3 h-100 rounded contact-map"
                 style={{ backgroundColor: "hsl(0, 79%, 41%)" }}
               >
                 <iframe
@@ -128,7 +150,7 @@ const ContactHome = () => {
             </div>
             <div className="col-lg-6 wow fadeIn" data-wow-delay=".5s">
               <div
-                className="p-5 rounded contact-form"
+                className="p-3 rounded contact-form"
                 style={{ backgroundColor: "#991515" }}
               >
                 <form onSubmit={handleSubmit}>

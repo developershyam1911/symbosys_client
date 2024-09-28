@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/newlog.png";
 import newGif from "../assets/img/new.gif";
+
 const Header = () => {
-  // State containing the dropdown menu items
   const [menuItems] = useState([
     { path: "/webDesign", label: "Website Designing & Development" },
     { path: "/seo", label: "SEO Optimization" },
@@ -26,17 +26,9 @@ const Header = () => {
     { path: "/ecommerce", label: "Ecommerce" },
     { path: "/graphics", label: "Graphics Designing" },
   ]);
-
-  // Placeholder for the newGif image source
-  const newGif = "path_to_new.gif";
+  const [toggle, setToggle] = useState(false);
   return (
     <>
-      {/* <div
-        id="spinner"
-        className="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
-      >
-        <div className="spinner-grow text-primary" role="status"></div>
-      </div> */}
       <div
         className="container-fluid"
         style={{
@@ -46,23 +38,28 @@ const Header = () => {
       >
         <div className="container">
           <nav className="navbar navbar-dark navbar-expand-lg py-0 d-flex justify-content-between align-items-center">
-            <Link to="/" className="navbar-brand">
-              <img src={logo} alt="logo" width="300" height="80" />
+            <Link
+              to="/"
+              className="navbar-brand"
+              onClick={() => setToggle(false)}
+            >
+              <img src={logo} alt="logo" width="200" height="60" />
             </Link>
             <button
               className="navbar-toggler"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarCollapse"
-              aria-controls="navbarCollapse"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+              onClick={() => setToggle(!toggle)}
+              // data-bs-toggle="collapse"
+              // data-bs-target="#navbarCollapse"
+              // aria-expanded="false"
             >
               <span className="navbar-toggler-icon"></span>
             </button>
             <div
-              className="collapse navbar-collapse justify-content-end"
-              id="navbarCollapse"
+              className={`collapse navbar-collapse justify-content-end ${
+                toggle ? "show" : ""
+              }`}
+              // id="navbarCollapse"
             >
               <div className="navbar-nav">
                 <Link
@@ -73,6 +70,7 @@ const Header = () => {
                     fontWeight: "bold",
                     color: "black",
                   }}
+                  onClick={() => setToggle(false)}
                 >
                   Home
                 </Link>
@@ -84,6 +82,7 @@ const Header = () => {
                     fontWeight: "bold",
                     color: "black",
                   }}
+                  onClick={() => setToggle(false)}
                 >
                   About
                 </Link>
@@ -95,6 +94,7 @@ const Header = () => {
                     fontWeight: "bold",
                     color: "black",
                   }}
+                  onClick={() => setToggle(false)}
                 >
                   Blog
                 </Link>
@@ -106,6 +106,7 @@ const Header = () => {
                     fontWeight: "bold",
                     color: "black",
                   }}
+                  onClick={() => setToggle(false)}
                 >
                   Products
                 </Link>
@@ -128,6 +129,7 @@ const Header = () => {
                         to={`/services${item.path}`}
                         className="dropdown-item"
                         key={index}
+                        onClick={() => setToggle(false)}
                       >
                         {item.label}
                         {item.isNew && (
@@ -144,6 +146,7 @@ const Header = () => {
                 <Link
                   to="/career"
                   className="nav-item nav-link"
+                  onClick={() => setToggle(false)}
                   style={{
                     fontSize: "16px",
                     fontWeight: "bold",
@@ -155,6 +158,7 @@ const Header = () => {
                 <Link
                   to="/contact"
                   className="nav-item nav-link"
+                  onClick={() => setToggle(false)}
                   style={{
                     fontSize: "16px",
                     fontWeight: "bold",
@@ -168,6 +172,23 @@ const Header = () => {
           </nav>
         </div>
       </div>
+
+      {/* Responsive media query for small screens */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .navbar-brand img {
+            width: 150px;
+            height: auto;
+          }
+          .navbar-nav .nav-item {
+            text-align: center;
+            margin: 0.5rem 0;
+          }
+          .navbar-collapse {
+            // background-color: rgba(255, 0, 0, 0.8);
+          }
+        }
+      `}</style>
     </>
   );
 };
