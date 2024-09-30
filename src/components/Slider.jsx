@@ -8,7 +8,7 @@ import Domain from "../assets/img/domainHome.png";
 import "swiper/css";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import "./benefits.css";
 const Slider = () => {
   const [slides] = useState([
     {
@@ -97,7 +97,7 @@ const Slider = () => {
             clickable: true,
           }}
           navigation={true}
-          //   autoplay={{ delay: 3000 }} // Autoplay with delay
+          autoplay={{ delay: 2000 }}
           modules={[Autoplay, Pagination]}
           className="mySwiper"
         >
@@ -115,10 +115,11 @@ const Slider = () => {
                     </div>
                     <div className="text-content">
                       <h1
+                        className="custom-text-heading"
                         style={{
-                          color: "white", // Changed to white for better visibility
+                          color: "white",
                           fontSize: "50px",
-                          fontFamily: "Impact",
+                          fontFamily: "arial",
                         }}
                       >
                         {item.title}
@@ -250,7 +251,7 @@ const Slider = () => {
           }
 
           .counter h5 {
-            font-size: 12px;
+            font-size: 20px;
           }
 
           .read-more,
@@ -281,7 +282,7 @@ const Slider = () => {
             font-size: 12px; /* टेक्स्ट का फॉन्ट साइज छोटा किया */
             /* margin-top: -100px; टेक्स्ट को आइकन के ऊपर स्थानित किया */
             color: black;
-            font-weight: bold;
+            // font-weight: bold;
             text-align: center;
             /* टेक्स्ट के लिए बैकग्राउंड जोड़ा ताकि वह स्पष्ट दिखे */
             width: 100%;

@@ -63,9 +63,13 @@
     .text-contents h2 {
       font-size: 18px; /* Adjust h2 size for mobile */
     }
-  
+
     .text-contents p {
       font-size: 12px; /* Smaller paragraph text */
+    }
+    .custom-text-heading{
+      font-size: 24px!important;
+      font-weight: 400!important;
     }
     .responsive-img{
       height: 150px!important;
