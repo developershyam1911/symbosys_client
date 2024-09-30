@@ -9,10 +9,12 @@ import Career from "./components/Career";
 import { ToastContainer } from "react-toastify";
 import SingleProducts from "./components/SingleProducts";
 import SingleServices from "./components/SingleServices";
+import WhatsppBtn from "./components/WhatsppBtn";
 
 const App = () => {
   return (
     <div>
+      <WhatsppBtn />
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<About />} path="about" />

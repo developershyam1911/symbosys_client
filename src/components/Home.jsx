@@ -26,9 +26,7 @@ const Home = () => {
       <StandoutSection />
       <ServiceSectionHome />
       <ProjectItemHome />
-      {/* <a href="https://wa.me/+919122010150" class="whatsapp-button back-to-top">
-        <MdWhatsapp size={25} />
-      </a> */}
+
       <BenefitsSectionHome />
       <ContactHome />
     </>

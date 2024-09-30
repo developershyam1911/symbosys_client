@@ -1,6 +1,7 @@
 import React from "react";
 import cone from "../assets/img/C_1.png";
 import aboutt2 from "../assets/img/aboutt2.png";
+import { Link } from "react-router-dom";
 const AboutHome = () => {
   return (
     <>
@@ -32,8 +33,8 @@ const AboutHome = () => {
               part of an odyssey where excellence knows no bounds. Welcome to
               SYMBOSYS — where dreams take a digital form.
             </p>
-            <a
-              href="#"
+            <Link
+              to="/about"
               className="read-moress"
               style={{
                 marginBottom: "10px",
@@ -47,7 +48,7 @@ const AboutHome = () => {
               }}
             >
               Read more
-            </a>
+            </Link>
           </div>
           {/* Image Section */}
           <div className="image-contentes col-md-6 col-12 text-center">
@@ -99,7 +100,7 @@ const AboutHome = () => {
               commitment to your success.
             </p>
             <a
-              href="#"
+              href="/services/software-development"
               className="read-more"
               style={{
                 display: "inline-block",

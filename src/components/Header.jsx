@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/newlog.png";
 import newGif from "../assets/img/new.gif";
+import axios from "axios";
 
 const Header = () => {
   const [menuItems] = useState([
@@ -26,6 +27,26 @@ const Header = () => {
     { path: "/ecommerce", label: "Ecommerce" },
     { path: "/graphics", label: "Graphics Designing" },
   ]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const getProductList = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/service`
+      );
+      setData(response.data?.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+      toast.error("Failed to fetch product list.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProductList();
+  }, []);
   const [toggle, setToggle] = useState(false);
   return (
     <>
@@ -37,7 +58,10 @@ const Header = () => {
         }}
       >
         <div className="container">
-          <nav className="navbar navbar-dark navbar-expand-lg py-0 d-flex justify-content-between align-items-center">
+          <nav
+            className="navbar navbar-dark navbar-expand-lg py-0 d-flex justify-content-between align-items-center"
+            style={{ zIndex: "999" }}
+          >
             <Link
               to="/"
               className="navbar-brand"
@@ -124,21 +148,18 @@ const Header = () => {
                     Services
                   </Link>
                   <div className="dropdown-menu">
-                    {menuItems.map((item, index) => (
+                    {data.map((item, index) => (
                       <Link
-                        to={`/services${item.path}`}
+                        to={`/services/${item.slug}`}
                         className="dropdown-item"
                         key={index}
+                        style={{
+                          fontSize: "12px",
+                          cursor: "pointer",
+                        }}
                         onClick={() => setToggle(false)}
                       >
-                        {item.label}
-                        {item.isNew && (
-                          <img
-                            src={newGif}
-                            alt="New GIF Icon"
-                            style={{ marginLeft: "5px" }}
-                          />
-                        )}
+                        {item.name}
                       </Link>
                     ))}
                   </div>

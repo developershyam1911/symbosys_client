@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const products = [
@@ -71,6 +72,27 @@ const products = [
 ];
 
 const Products = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const getProductList = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/product`
+      );
+
+      setData(response.data?.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+      toast.error("Failed to fetch product list.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProductList();
+  }, []);
   return (
     <div
       className="container-fluid industry-services"
@@ -81,14 +103,14 @@ const Products = () => {
           <h2>Our Products</h2>
         </div>
         <div className="row">
-          {products?.map((product, index) => (
+          {data?.map((product, index) => (
             <div className="col-md-3" key={index}>
               <div className="service-item">
                 <Link
-                  to={`/products/${product.link}`}
+                  to={`/products/${product.slug}`}
                   className="nav-item nav-link"
                 >
-                  <h4>{product.title}</h4>
+                  <h4>{product.name}</h4>
                 </Link>
               </div>
             </div>

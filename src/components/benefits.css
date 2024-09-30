@@ -67,4 +67,8 @@
     .text-contents p {
       font-size: 12px; /* Smaller paragraph text */
     }
+    .responsive-img{
+      height: 150px!important;
+      width: 150px!important;
+    }
   }

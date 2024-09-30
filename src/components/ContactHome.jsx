@@ -70,7 +70,7 @@ const ContactHome = () => {
                     className="h6"
                     style={{ textDecoration: "none" }}
                   >
-                    Harmu, Ranchi
+                    Kadru, Ranchi
                   </a>
                 </div>
               </div>

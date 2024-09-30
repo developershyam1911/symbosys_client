@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./career.css"; // Assuming you have a separate CSS file for styling
 import bgImage from "../assets/img/carrerbc.png";
 import { Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 const Career = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -52,68 +53,38 @@ const Career = () => {
     } catch (err) {
       console.log(err);
     }
-
-    // Perform form submission, replace with your desired logic
-    // fetch("https://symbosys.com/datat4.php", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    //   body: new URLSearchParams(formData).toString(),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Success:", data);
-    //     alert("Form submitted successfully");
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     alert("There was an error submitting the form.");
-    //   });
   };
+  const [data, setData] = useState({});
+  console.log("about data", data);
+  useEffect(() => {
+    const fetchAbout = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/career`
+        );
+        const aboutData = response?.data?.data[0];
+        // const aboutData = response;
+        console.log("aboug data", aboutData);
+        if (aboutData) {
+          setData(aboutData);
+        }
+      } catch (err) {
+        console.error("Error fetching About: ", err);
+      }
+    };
+    fetchAbout();
+  }, []);
 
   return (
     <>
       <div className="bg" style={{ backgroundImage: bgImage }}>
         <div className="container">
           <div className="content">
-            <h2>
-              Career @ Symbosys: An ISO 9001: 2018 Certified Software Company
-            </h2>
-            <p>
-              Very few seats are available. Apply soon as per opening mentioned
-              below. Kindly read the details carefully before applying. All
-              openings are based on Physical Interview and Technical Test.
-            </p>
-            <p>Do come with your well-prepared following documents:</p>
-            <ul>
-              <li style={{ fontSize: "18px" }}>1. CV</li>
-              <li style={{ fontSize: "18px" }}>2. PP size Photographs</li>
-              <li style={{ fontSize: "18px" }}>3. Aadhar or Pan Card</li>
-              <li style={{ fontSize: "18px" }}>
-                4. Original & Xerox copy of Educational certificate
-              </li>
-            </ul>
-            <p>
-              Without proper documents, you will be disqualified automatically.
-            </p>
-            <p
-              className="note"
-              style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}
-            >
-              Note:
-            </p>
-            <ul>
-              <li style={{ color: "black" }}>
-                1. Brightcode Software Services Pvt. Ltd. don't accept any
-                payment for any appointment directly or indirectly through any
-                agent. So be careful and only you will be responsible for any
-                misleading promises.
-              </li>
-              <li style={{ color: "black" }}>
-                2. Selection is done only on merit.
-              </li>
-            </ul>
+            <h2>{data?.name}</h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: data?.description }}
+              style={{ textAlign: "justify" }}
+            />
           </div>
         </div>
       </div>

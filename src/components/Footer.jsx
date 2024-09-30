@@ -146,8 +146,7 @@ const Footer = () => {
               <div className="text-white mt-4 d-flex flex-column contact-link">
                 <a href="#" className="pb-3 text-light">
                   <MdLocationOn size={22} className=" text-white me-2" />
-                  Ranchi-Road No.1A, Beside Manushree Apartment, Harmu, Ranchi,
-                  834002
+                  Plot No.9, New AG Colony, Kadru, Ranchi, 834002
                 </a>
                 <a href="#" className="pb-3 text-light">
                   <MdLocationOn size={22} className=" text-white me-2" />
