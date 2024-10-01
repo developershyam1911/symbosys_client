@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BsMap } from "react-icons/bs";
 import "./benefits.css";
 import { MdCall, MdLocationCity, MdMail, MdMap } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
 const ContactHome = () => {
   // State to store form input values
   const [formData, setFormData] = useState({
@@ -21,17 +23,36 @@ const ContactHome = () => {
   };
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform form submission logic here (e.g., send data to the server)
-    console.log(formData);
-    alert("Form submitted successfully!");
-    setFormData({
-      name: "",
-      email: "",
-      project: "",
-      message: "",
-    });
+    const { name, email, project, message } = formData;
+    if (name !== "" && email !== " " && project !== "" && message !== "") {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/contact`,
+          {
+            name,
+            email,
+            project,
+            message,
+          }
+        );
+        console.log(response);
+        toast.success("Your Details Send Successfully.");
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          project: "",
+          message: "",
+        });
+      } catch (err) {
+        console.error("Error: ", err.message);
+        // toast.error("Error applying job.");
+      }
+    } else {
+      toast.error("Please fill all the mandatory fields.");
+    }
   };
 
   return (
@@ -209,6 +230,7 @@ const ContactHome = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

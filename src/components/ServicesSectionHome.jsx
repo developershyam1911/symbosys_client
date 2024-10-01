@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import aboutt from "../assets/img/aboutt.png";
 import soft from "../assets/img/soft.png";
 import phone from "../assets/img/phone.png";
@@ -8,7 +8,29 @@ import domaim from "../assets/img/domaim.png";
 import ecom2 from "../assets/img/ecom2.png";
 import anim from "../assets/img/anim.png";
 import marketing from "../assets/img/marketing.png";
+import axios from "axios";
+import { Link } from "react-router-dom";
 const ServiceSectionHome = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const getProductList = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/service`
+      );
+      setData(response.data?.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+      toast.error("Failed to fetch product list.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProductList();
+  }, []);
   return (
     <div
       className="container-fluid mt-5"
@@ -19,7 +41,7 @@ const ServiceSectionHome = () => {
       </h2>
 
       {/* Row 1 */}
-      <div className="row mt-4 mb-4">
+      {/* <div className="row mt-4 mb-4">
         {[
           {
             imgSrc: aboutt,
@@ -57,11 +79,11 @@ const ServiceSectionHome = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Row 2 */}
       <div className="row mt-4 mb-4">
-        {[
+        {/* {[
           {
             imgSrc: seoo,
             title: "Search Engine Optimization",
@@ -80,20 +102,25 @@ const ServiceSectionHome = () => {
             text: "Domains serve as the digital equivalents of street addresses. Our offerings include domain management, SSL certificates, facilitating users in locating your website effortlessly.",
             link: "domain.html",
           },
-        ].map((service, index) => (
+        ] */}
+        {/* } */}
+        {data.map((service, index) => (
           <div className="col-md-4 d-flex align-items-stretch" key={index}>
             <div className="card w-100">
               <img
-                src={service.imgSrc}
+                src={service.image}
                 className="card-img-top"
-                alt={service.title}
+                alt={service.name}
               />
               <div className="card-body">
-                <h5 className="card-title">{service.title}</h5>
+                <h5 className="card-title">{service.name}</h5>
                 <p className="card-text text-dark">{service.text}</p>
-                <a href={service.link} className="btn btn-warning">
+                <Link
+                  to={`/services/${service.slug}`}
+                  className="btn btn-warning"
+                >
                   Read more →
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -101,7 +128,7 @@ const ServiceSectionHome = () => {
       </div>
 
       {/* Row 3 */}
-      <div className="row mt-4 mb-4">
+      {/* <div className="row mt-4 mb-4">
         {[
           {
             imgSrc: ecom2,
@@ -139,7 +166,7 @@ const ServiceSectionHome = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

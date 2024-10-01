@@ -1,7 +1,6 @@
 
 /* Media Queries */
 @media (max-width: 768px) {
-    
     .contentch {
       flex-direction: column; /* Stack cards vertically on small screens */
       align-items: center; /* Center align cards */

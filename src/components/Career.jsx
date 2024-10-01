@@ -27,7 +27,7 @@ const Career = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, mobileno, jobtitle, description } = formData;
     if (
@@ -37,14 +37,30 @@ const Career = () => {
       jobtitle !== "" &&
       description !== ""
     ) {
-      toast.success("data send successfully");
-      setFormData({
-        name: "",
-        email: "",
-        mobileno: "",
-        jobtitle: "",
-        description: "",
-      });
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/job`,
+          {
+            name,
+            email,
+            mobileno,
+            jobtitle,
+            description,
+          }
+        );
+        console.log(response);
+        toast.success("Your Details Send Successfully.");
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          mobileno: "",
+          jobtitle: "",
+          description: "",
+        });
+      } catch (err) {
+        console.error("Error: ", err.message);
+      }
       handleClose();
     } else {
       toast.error("All filed is required");
@@ -74,7 +90,26 @@ const Career = () => {
     };
     fetchAbout();
   }, []);
+  const [dataList, setDataList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const getJobList = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/jobPost`
+      );
+      setDataList(response.data?.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching job data:", error);
+      toast.error("Failed to fetch job list.");
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    getJobList();
+  }, []);
   return (
     <>
       <div className="bg" style={{ backgroundImage: bgImage }}>
@@ -90,80 +125,64 @@ const Career = () => {
       </div>
       <div className="container mt-4">
         <div className="row">
-          <div className="col-md-6">
-            <div className="card mb-4">
-              <div className="card-body">
-                <h3 className="card-title">Job Description</h3>
-                <table className="table">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <strong>Requirement:</strong>
-                      </td>
-                      <td>HR</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>Qualification:</strong>
-                      </td>
-                      <td>MBA / B.Tech (CS / IT) with experience</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>Job Description:</strong>
-                      </td>
-                      <td>
-                        <ul>
-                          <li>
-                            Support in planning and implementing key HR
-                            initiatives to help the organization become an
-                            Employer of Choice
-                          </li>
-                          <li>
-                            Work with Head HR in execution of HR business
-                            plan/strategy; embed change into day-to-day working
-                            practice and organization culture so as to build a
-                            performance-oriented organization.
-                          </li>
-                          <li>
-                            Continuously supports review and improvement of the
-                            HR policies to reinforce organizational culture.
-                          </li>
-                          <li>
-                            Develop solutions which enable successful retention
-                            strategies and solve capability gaps using internal
-                            and external levers including development,
-                            resourcing, training, and innovative stretch
-                            experiential opportunities.
-                          </li>
-                          <li>
-                            Coordinate to provide accurate inputs for payroll.
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button
-                  style={{
-                    backgroundColor: "green",
-                    color: "white",
-                    borderRadius: "10px",
-                    border: "none",
-                    padding: "10px 10px",
-                  }}
-                  data-toggle="modal"
-                  data-target="#applyFormModal"
-                  onClick={handleShow}
-                >
-                  Apply Now
-                </button>
+          {dataList.map((item, index) => {
+            return (
+              <div className="col-md-6">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <h4 className="card-title">Aply For {item.degination}</h4>
+                    <table className="table">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <strong>Requirement:</strong>
+                          </td>
+                          <td>{item.degination}</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>Number of Position:</strong>
+                          </td>
+                          <td>{item.pepol}</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>Qualification:</strong>
+                          </td>
+                          <td>{item.qualification}</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>Job Description:</strong>
+                          </td>
+                          <td>
+                            <p>{item.description}</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button
+                      style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        borderRadius: "5px",
+                        border: "none",
+                        padding: "10px 10px",
+                      }}
+                      data-toggle="modal"
+                      data-target="#applyFormModal"
+                      onClick={handleShow}
+                    >
+                      Apply Now
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
 
           {/* Open Positions Column */}
-          <div className="col-md-6">
+          {/* <div className="col-md-6">
             <div className="card mb-4">
               <div className="card-body">
                 <h3 className="card-title">Open Positions</h3>
@@ -239,7 +258,7 @@ const Career = () => {
                 </table>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton={handleClose}>
@@ -249,7 +268,7 @@ const Career = () => {
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
+              <div className="form-group mb-2">
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
@@ -260,7 +279,7 @@ const Career = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group mb-2">
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
@@ -271,7 +290,7 @@ const Career = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group mb-2">
                 <label htmlFor="mobileno">Mobile No</label>
                 <input
                   type="text"
@@ -282,7 +301,7 @@ const Career = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group mb-2">
                 <label htmlFor="jobtitle">Job Title</label>
                 <select
                   className="form-control"
@@ -302,7 +321,7 @@ const Career = () => {
                   {/* Add more options as needed */}
                 </select>
               </div>
-              <div className="form-group">
+              <div className="form-group mb-2">
                 <label htmlFor="description">Description</label>
                 <input
                   type="text"
