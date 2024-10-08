@@ -1,0 +1,15 @@
+
+
+.calling-btn{
+    height: 60px;
+    width: 60px;
+    position: fixed;
+    bottom: 120px;
+    background-color: rgb(0, 51, 0);
+    right: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CallingBtn from "./CallingBtn";
 const SingleServices = () => {
   const { slug } = useParams();
   const [data, setData] = useState({});
@@ -26,23 +27,26 @@ const SingleServices = () => {
     getSingleProduct();
   }, [slug]);
   return (
-    <div className="container">
-      <div className="row mb-5">
-        <center>
-          <div className="div">
-            <img
-              src={data.image}
-              style={{ height: "400px", width: "400px" }}
-              className="responsive-img"
-            />
-          </div>
-        </center>
-        <div
-          dangerouslySetInnerHTML={{ __html: data.description }}
-          style={{ textAlign: "justify" }}
-        />
+    <>
+      <div className="container">
+        <div className="row mb-5">
+          <center>
+            <div className="div">
+              <img
+                src={data.image}
+                style={{ height: "400px", width: "400px" }}
+                className="responsive-img"
+              />
+            </div>
+          </center>
+          <div
+            dangerouslySetInnerHTML={{ __html: data.description }}
+            style={{ textAlign: "justify" }}
+          />
+        </div>
+        <CallingBtn />
       </div>
-    </div>
+    </>
   );
 };
 

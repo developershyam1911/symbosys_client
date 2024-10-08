@@ -6,8 +6,11 @@ import VideoAnimation from "../assets/img/VideoAnimation.png";
 import iconbc from "../assets/img/iconbc.png";
 import Domain from "../assets/img/domainHome.png";
 import "swiper/css";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, Zoom, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css/zoom";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "./benefits.css";
 const Slider = () => {
   const [slides] = useState([
@@ -93,12 +96,17 @@ const Slider = () => {
       {/* Swiper Slider on top of the video */}
       <div className="slider-content">
         <Swiper
+          style={{
+            "--swiper-navigation-color": "#fff",
+            "--swiper-pagination-color": "#fff",
+          }}
+          zoom={true}
+          navigation={true}
           pagination={{
             clickable: true,
           }}
-          navigation={true}
           autoplay={{ delay: 2000 }}
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay, Zoom, Pagination, Navigation]}
           className="mySwiper"
         >
           {slides?.map((item, index) => {
@@ -124,7 +132,15 @@ const Slider = () => {
                       >
                         {item.title}
                       </h1>
-                      <p style={{ color: "white" }}>{item.description}</p>
+                      <p
+                        style={{
+                          color: "white",
+                          // backgroundColor: "red",
+                          padding: "0 40px",
+                        }}
+                      >
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 </div>
