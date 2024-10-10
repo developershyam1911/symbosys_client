@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import mobilehome from "../assets/img/mobilehome.png";
 import websitehome from "../assets/img/websitehome.png";
 import DigitalHome from "../assets/img/DigitalHome.png";
@@ -12,6 +12,8 @@ import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./benefits.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
 const Slider = () => {
   const [slides] = useState([
     {
@@ -54,7 +56,7 @@ const Slider = () => {
   const [counters] = useState([
     {
       value: 99,
-      description: "Success in getting happy customers",
+      description: "Happy customers",
     },
     {
       value: 25,
@@ -66,9 +68,30 @@ const Slider = () => {
     },
     {
       value: 52,
-      description: "Stars reviews given by satisfied clients",
+      description: "Stars rated by happy customers",
     },
   ]);
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const getProductList = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_DEVELOPMENT}/api/v1/service`
+      );
+      setData(response.data?.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+      toast.error("Failed to fetch product list.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProductList();
+  }, []);
   const sliders = [
     { img: iconbc, text: "Graphic Designing" },
     { img: iconbc, text: "Mobile App Development" },
@@ -113,7 +136,7 @@ const Slider = () => {
             return (
               <SwiperSlide key={index}>
                 <div className="carousel-item">
-                  <div className="content-overlay">
+                  <div className="content-overlay col-md-8">
                     <div className="photo">
                       <img
                         src={item.img}
@@ -149,9 +172,13 @@ const Slider = () => {
           })}
         </Swiper>
       </div>
+
       <div
         className="container-fluid py-5"
-        style={{ backgroundColor: "lightblue", color: "black" }}
+        style={{
+          background: "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)", // Gradient background
+          color: "black",
+        }}
       >
         <div className="container">
           <div className="row">
@@ -160,16 +187,39 @@ const Slider = () => {
                 className="col-lg-3 col-md-6 col-sm-12 wow fadeIn"
                 data-wow-delay={`${index * 0.2}s`}
                 key={index}
-                style={{ marginBottom: "20px" }}
+                style={{
+                  marginBottom: "20px",
+                  transition: "transform 0.3s ease-in-out", // Smooth hover transition
+                }}
               >
-                <div className="d-flex counter">
+                <div
+                  className="d-flex flex-column align-items-center counter p-3"
+                  style={{
+                    backgroundColor: "#fff", // White background for counter box
+                    borderRadius: "10px", // Rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    padding: "20px", // Padding for content spacing
+                    transition: "box-shadow 0.3s ease-in-out",
+                  }}
+                >
+                  {/* Counter Value */}
                   <h1
-                    className="me-3 text-primary"
-                    style={{ fontSize: "24px" }} // Adjust font size for mobile
+                    className="text-primary"
+                    style={{
+                      fontSize: "36px", // Larger font size for desktop
+                      color: "#007bff", // Primary color
+                    }}
                   >
                     {counter.value}
                   </h1>
-                  <h5 className="text-white mt-1 counter-description ">
+
+                  {/* Counter Description */}
+                  <h5
+                    className="text-dark mt-1 text-center counter-description"
+                    style={{
+                      fontSize: "18px", // Adjust font size for responsiveness
+                    }}
+                  >
                     {counter.description}
                   </h5>
                 </div>
@@ -177,134 +227,301 @@ const Slider = () => {
             ))}
           </div>
         </div>
+
+        {/* Add hover effects and custom styles */}
+        <style jsx>{`
+          .counter:hover {
+            transform: translateY(-10px); /* Lift on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deepen shadow on hover */
+          }
+
+          @media (max-width: 768px) {
+            /* Adjust for tablets */
+            .counter h1 {
+              font-size: 30px; /* Smaller font for tablet */
+            }
+            .counter h5 {
+              font-size: 16px;
+            }
+          }
+
+          @media (max-width: 576px) {
+            /* Adjust for mobile */
+            .counter h1 {
+              font-size: 24px; /* Even smaller font for mobile */
+            }
+            .counter h5 {
+              font-size: 14px;
+            }
+          }
+        `}</style>
       </div>
 
-      <section className="warning-notice">
+      <section className="offer-notice">
         <div className="container-fluid p-0">
           <div className="row no-gutters">
+            {/* Left side button with fade-in animation */}
             <div
-              className="col-12 col-md-2 d-flex justify-content-center align-items-center"
-              style={{ backgroundColor: "#cc0108", padding: "10px" }}
+              className="col-12 col-md-2 d-flex justify-content-center align-items-center animate__animated animate__fadeInLeft" // Fade-in animation
+              style={{
+                background: "linear-gradient(45deg, #ff416c, #ff4b2b)", // Gradient background
+                padding: "10px",
+              }}
             >
               <button
-                className="btn-block mt-2"
+                className="btn-block offer-button"
                 style={{
-                  backgroundColor: "#cc0108",
+                  background: "linear-gradient(45deg, #ff416c, #ff4b2b)", // Matching gradient
                   color: "white",
                   border: "none",
-                  fontSize: "16px", // Adjust button size for mobile
+                  fontSize: "18px", // Button size for mobile
+                  fontWeight: "700", // Bold for emphasis
                   width: "100%",
+                  padding: "10px 20px", // Bigger button
+                  borderRadius: "30px", // Rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // Shadow for depth
+                  transition: "0.3s ease", // Smooth transition for hover
                 }}
               >
-                Services
+                Limited Offers
               </button>
             </div>
+
+            {/* Right side scrolling text with animation */}
             <div
-              className="col-12 col-md-10 d-flex align-items-center"
-              style={{ backgroundColor: "#cc0108", color: "#f5c413" }}
+              className="col-12 col-md-10 d-flex align-items-center animate__animated animate__fadeInRight" // Fade-in from right animation
+              style={{
+                background: "linear-gradient(45deg, #0f2027, #203a43, #2c5364)", // Dark gradient for contrast
+                color: "#f5c413",
+              }}
             >
-              <div className="scrolling-text">
-                <marquee>
+              <div className="scrolling-text w-100">
+                <marquee
+                  behavior="scroll"
+                  direction="left"
+                  scrollamount="5" // Adjust scroll speed
+                >
                   <p
                     style={{
                       marginBottom: "5px",
-                      fontWeight: "600",
+                      fontWeight: "bold", // Bold text
                       padding: "12px",
-                      color: "#e0e0e0",
+                      color: "#ffffff", // White for readability
                       textAlign: "center",
-                      fontSize: "14px", // Smaller text for mobile
+                      fontSize: "16px", // Larger font size
+                      letterSpacing: "1px", // Spacing for readability
                     }}
                   >
-                    "Website Designing and Development, Mobile App Development,
+                    <span style={{ color: "#f5c413" }}>Exclusive Offer: </span>
+                    Website Designing & Development, Mobile App Development,
                     School Management, Hotel Management Software, SEO, SEM,
                     Digital Marketing, Graphic Designing, Company Registration,
-                    GST, E-Filing, ERP, CRM, etc"
+                    GST, E-Filing, ERP, CRM, and more!
                   </p>
                 </marquee>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Add styles for hover, animations, and keyframes */}
+        <style jsx>{`
+          /* Add animations for buttons */
+          .offer-button {
+            animation: fadeInUp 1s ease-in-out; /* Animate on load */
+          }
+
+          .offer-button:hover {
+            background: linear-gradient(
+              45deg,
+              #ff6f61,
+              #ff9068
+            ); /* Lighter gradient on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px); /* Lift button on hover */
+            transition: transform 0.2s ease-in-out, background 0.3s ease-in-out;
+          }
+
+          /* Keyframes for fade-in effect */
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          /* Button and text fade-in animations */
+          .animate__fadeInLeft {
+            animation: fadeInLeft 1.5s;
+          }
+
+          .animate__fadeInRight {
+            animation: fadeInRight 1.5s;
+          }
+
+          /* Add fade-in-left and fade-in-right keyframes */
+          @keyframes fadeInLeft {
+            from {
+              opacity: 0;
+              transform: translateX(-50px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          @keyframes fadeInRight {
+            from {
+              opacity: 0;
+              transform: translateX(50px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        `}</style>
       </section>
 
       <div className="container-fluid" style={{ padding: 0 }}>
         <div className="sliders">
           <div className="slide-tracks">
-            {sliders.map((slide, index) => (
-              <div key={index} className="slides">
-                <img
-                  src={slide.img}
-                  alt="Icon"
-                  style={
-                    {
-                      // width: "100px",
-                      // height: "auto",
-                      // maxWidth: "100%", // Ensures images adjust on mobile
-                    }
-                  }
-                />
-                <div className="slide-content">
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {slide.text}
-                  </p>
-                </div>
+            {data.map((slide, index) => (
+              <div key={index} className="mt-2">
+                <Link to={`/services/${slide.slug}`}>
+                  <div className="slide-card">
+                    <center>
+                      {" "}
+                      <img
+                        src={slide.image}
+                        alt={slide.name}
+                        className="slide-image"
+                      />
+                    </center>
+                    <div className="slide-content">
+                      <p className="slide-title">{slide.name}</p>
+                    </div>
+                  </div>
+                </Link>
               </div>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Media queries for further adjustments */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .counter h1 {
-            font-size: 20px;
+        {/* CSS for improved design and responsiveness */}
+        <style jsx>{`
+          /* Basic styles for sliders */
+          .sliders {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px 0;
           }
 
-          .counter h5 {
-            font-size: 20px;
+          .slide-tracks {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            transition: transform 0.5s ease;
           }
 
-          .read-more,
-          .read-moress {
-            font-size: 12px;
-          }
-
-          .slides img {
-            width: 80px;
-          }
           .slides {
-            height: 200px; /* स्लाइड की ऊंचाई वही रखी */
-            width: 200px;
             flex-shrink: 0;
-            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
 
-          .slides img {
-            height: 350px; /* आइकन की ऊंचाई वही रखी */
-            width: 350px; /* आइकन की चौड़ाई वही रखी */
-            object-fit: contain; /* आइकन को कंटेनर में फिट करने के लिए */
-          }
-          .counter-description {
-            fontsize: "20px";
-            whitespace: "nowrap";
-          }
-          .slide-content {
-            font-size: 12px; /* टेक्स्ट का फॉन्ट साइज छोटा किया */
-            /* margin-top: -100px; टेक्स्ट को आइकन के ऊपर स्थानित किया */
-            color: black;
-            // font-weight: bold;
+          /* Card-like structure */
+          .slide-card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 250px;
+            height: 250px;
             text-align: center;
-            /* टेक्स्ट के लिए बैकग्राउंड जोड़ा ताकि वह स्पष्ट दिखे */
-            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
           }
-        }
-      `}</style>
+
+          .slide-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+          }
+
+          /* Image styles for the card */
+          .slide-image {
+            width: 150px;
+            // height: 50%;
+            object-fit: cover;
+          }
+
+          /* Text content inside the card */
+          .slide-content {
+            padding: 15px;
+            display: flex;
+            border-top: 1px solid #ff416c;
+            justify-content: center;
+            align-items: center;
+            background: #fafafa;
+          }
+
+          .slide-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+            transition: color 0.3s;
+          }
+
+          .slide-card:hover .slide-title {
+            color: #ff416c;
+          }
+
+          /* Mobile responsiveness */
+          @media (max-width: 768px) {
+            .slide-card {
+              width: 200px;
+              height: 200px;
+            }
+
+            .slide-title {
+              font-size: 16px;
+            }
+
+            .slide-image {
+              height: 55%;
+            }
+          }
+
+          /* Tablet responsiveness */
+          @media (max-width: 1024px) {
+            .slide-card {
+              width: 220px;
+              height: 200px;
+            }
+
+            .slide-title {
+              font-size: 17px;
+            }
+
+            .slide-image {
+              height: 58%;
+              padding: 10px;
+            }
+          }
+        `}</style>
+      </div>
     </>
   );
 };

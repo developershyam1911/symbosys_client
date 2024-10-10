@@ -25,7 +25,7 @@
       .sliders {
         background: linear-gradient(0deg, #2ea2be, transparent);
         box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
-        height: 200px; 
+        height: auto; 
         margin: 0;
         overflow: hidden;
         position: relative;

@@ -67,7 +67,13 @@ const Header = () => {
               className="navbar-brand"
               onClick={() => setToggle(false)}
             >
-              <img src={logo} alt="logo" width="200" height="60" />
+              <img
+                src={logo}
+                alt="logo"
+                width="200"
+                height="60"
+                style={{ height: "80px", width: "100%" }}
+              />
             </Link>
             <button
               className="navbar-toggler"
@@ -91,8 +97,9 @@ const Header = () => {
                   className="nav-item nav-link active"
                   style={{
                     fontSize: "16px",
-                    fontWeight: "bold",
+                    fontWeight: "600",
                     color: "black",
+                    fontFamily: "initial",
                   }}
                   onClick={() => setToggle(false)}
                 >
@@ -103,8 +110,9 @@ const Header = () => {
                   className="nav-item nav-link"
                   style={{
                     fontSize: "16px",
-                    fontWeight: "bold",
+                    fontWeight: "600",
                     color: "black",
+                    fontFamily: "initial",
                   }}
                   onClick={() => setToggle(false)}
                 >
@@ -115,8 +123,9 @@ const Header = () => {
                   className="nav-item nav-link"
                   style={{
                     fontSize: "16px",
-                    fontWeight: "bold",
+                    fontWeight: "600",
                     color: "black",
+                    fontFamily: "initial",
                   }}
                   onClick={() => setToggle(false)}
                 >
@@ -127,8 +136,9 @@ const Header = () => {
                   className="nav-item nav-link"
                   style={{
                     fontSize: "16px",
-                    fontWeight: "bold",
+                    fontWeight: "600",
                     color: "black",
+                    fontFamily: "initial",
                   }}
                   onClick={() => setToggle(false)}
                 >
@@ -141,7 +151,8 @@ const Header = () => {
                     data-bs-toggle="dropdown"
                     style={{
                       fontSize: "16px",
-                      fontWeight: "bold",
+                      fontWeight: "600",
+                      fontFamily: "initial",
                       color: "black",
                     }}
                   >
@@ -156,6 +167,7 @@ const Header = () => {
                         style={{
                           fontSize: "12px",
                           cursor: "pointer",
+                          fontFamily: "initial",
                         }}
                         onClick={() => setToggle(false)}
                       >
@@ -170,8 +182,9 @@ const Header = () => {
                   onClick={() => setToggle(false)}
                   style={{
                     fontSize: "16px",
-                    fontWeight: "bold",
+                    fontWeight: "600",
                     color: "black",
+                    fontFamily: "initial",
                   }}
                 >
                   Career
@@ -182,8 +195,9 @@ const Header = () => {
                   onClick={() => setToggle(false)}
                   style={{
                     fontSize: "16px",
-                    fontWeight: "bold",
+                    fontWeight: "600",
                     color: "black",
+                    fontFamily: "initial",
                   }}
                 >
                   Contact
@@ -198,9 +212,9 @@ const Header = () => {
       <style jsx>{`
         @media (max-width: 768px) {
           .navbar-brand img {
-            width: 150px;
-            height: auto;
-          }
+            width: 100% !important;
+            height: 50px !important;
+        
           .navbar-nav .nav-item {
             text-align: center;
             margin: 0.5rem 0;

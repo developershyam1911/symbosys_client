@@ -10,11 +10,13 @@ import { ToastContainer } from "react-toastify";
 import SingleProducts from "./components/SingleProducts";
 import SingleServices from "./components/SingleServices";
 import WhatsppBtn from "./components/WhatsppBtn";
+import CallingBtn from "./components/CallingBtn";
 
 const App = () => {
   return (
     <div>
       <WhatsppBtn />
+      <CallingBtn />
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<About />} path="about" />
