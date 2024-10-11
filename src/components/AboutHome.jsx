@@ -100,7 +100,7 @@ const AboutHome = () => {
               commitment to your success.
             </p>
             <a
-              href="/services/software-development"
+              href="/about"
               className="read-more"
               style={{
                 display: "inline-block",

@@ -74,6 +74,7 @@ const Slider = () => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const getProductList = async () => {
     try {
       setLoading(true);
@@ -92,6 +93,14 @@ const Slider = () => {
   useEffect(() => {
     getProductList();
   }, []);
+  // Skeleton Loader Component
+  const SkeletonLoader = () => (
+    <div className="skeleton-card">
+      <div className="skeleton-image" />
+      <div className="skeleton-title" />
+    </div>
+  );
+
   const sliders = [
     { img: iconbc, text: "Graphic Designing" },
     { img: iconbc, text: "Mobile App Development" },
@@ -390,52 +399,84 @@ const Slider = () => {
 
       <div className="container-fluid" style={{ padding: 0 }}>
         <div className="sliders">
-          <div className="slide-tracks">
-            {data.map((slide, index) => (
-              <div key={index} className="mt-2">
-                <Link to={`/services/${slide.slug}`}>
-                  <div className="slide-card">
-                    <center>
-                      {" "}
-                      <img
-                        src={slide.image}
-                        alt={slide.name}
-                        className="slide-image"
-                      />
-                    </center>
-                    <div className="slide-content">
-                      <p className="slide-title">{slide.name}</p>
+          {loading ? (
+            // Show skeletons while loading
+            <marquee behavior="scroll" direction="left" scrollamount="5">
+              {[...Array(5)].map((_, index) => (
+                <div
+                  key={index}
+                  className="mt-2"
+                  style={{ display: "inline-block", marginRight: "20px" }}
+                >
+                  <SkeletonLoader />
+                </div>
+              ))}
+            </marquee>
+          ) : (
+            // Show actual slides when data is loaded
+            <marquee behavior="alternet" direction="left" scrollamount="5">
+              {data.map((slide, index) => (
+                <div
+                  key={index}
+                  className="mt-2"
+                  style={{ display: "inline-block", marginRight: "20px" }}
+                >
+                  <Link to={`/services/${slide.slug}`}>
+                    <div className="slide-card">
+                      <center>
+                        <img
+                          src={slide.image}
+                          alt={slide.name}
+                          className="slide-image"
+                        />
+                      </center>
+                      <div className="slide-content">
+                        <p className="slide-title">
+                          {slide.name.length >= 22
+                            ? `${slide.name.slice(0, 22)}...`
+                            : slide.name}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+                  </Link>
+                </div>
+              ))}
+            </marquee>
+          )}
         </div>
 
         {/* CSS for improved design and responsiveness */}
         <style jsx>{`
           /* Basic styles for sliders */
           .sliders {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
             padding: 20px 0;
           }
 
-          .slide-tracks {
+          /* Skeleton card styles */
+          .skeleton-card {
+            background: #e0e0e0; /* Light grey background */
+            border-radius: 15px;
+            width: 250px;
+            height: 250px;
             display: flex;
-            flex-wrap: nowrap;
-            gap: 20px;
-            transition: transform 0.5s ease;
-          }
-
-          .slides {
-            flex-shrink: 0;
-            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+          }
+
+          .skeleton-image {
+            width: 150px;
+            height: 150px;
+            background: #ccc; /* Grey placeholder */
+            border-radius: 10px;
+          }
+
+          .skeleton-title {
+            width: 80%; /* Placeholder width */
+            height: 20px;
+            background: #ccc;
+            margin-top: 10px;
+            border-radius: 5px;
           }
 
           /* Card-like structure */
@@ -462,7 +503,6 @@ const Slider = () => {
           /* Image styles for the card */
           .slide-image {
             width: 150px;
-            // height: 50%;
             object-fit: cover;
           }
 
@@ -477,7 +517,7 @@ const Slider = () => {
           }
 
           .slide-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             text-align: center;
             color: #333;

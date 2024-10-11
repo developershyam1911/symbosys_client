@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Import Link for internal navigation
 import adminImg from "../assets/img/admin.jpg";
+import "./footer.css";
 import {
   BsChatRight,
   BsFacebook,
@@ -21,17 +22,17 @@ const Footer = () => {
   return (
     <>
       <div
-        className="container-fluid footer bg-primary wow fadeIn"
+        className="container-fluid footer wow fadeIn"
         data-wow-delay=".3s"
+        style={footerStyle}
       >
         <div className="container pt-5 pb-4">
           <div className="row g-5">
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6 text-center">
               <Link to="/">
                 <h1 className="text-white fw-bold d-block">
                   <span className="text-secondary"></span>
                 </h1>
-
                 <img
                   src={adminImg}
                   alt="Admin"
@@ -56,23 +57,23 @@ const Footer = () => {
               </Link>
               <div className="mt-4 d-flex flex-column short-link">
                 <Link to="/about" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   About us
                 </Link>
                 <Link to="/contact" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   Contact us
                 </Link>
                 <Link to="#" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   Our Services
                 </Link>
                 <Link to="/admin" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   Admin
                 </Link>
                 <Link to="/blog" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   Latest Blog
                 </Link>
 
@@ -117,23 +118,23 @@ const Footer = () => {
               </Link>
               <div className="mt-4 d-flex flex-column help-link">
                 <Link to="/terms" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   Terms & Conditions
                 </Link>
                 <Link to="/privacy" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   Privacy Policy
                 </Link>
                 <Link to="/contact" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
-                  Helps
+                  <FaAngleRight className="text-white me-2" />
+                  Help
                 </Link>
                 <Link to="/help" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
-                  FQAs
+                  <FaAngleRight className="text-white me-2" />
+                  FAQs
                 </Link>
                 <Link to="/contact" className="mb-2 text-white">
-                  <FaAngleRight className=" text-white me-2" />
+                  <FaAngleRight className="text-white me-2" />
                   Contact
                 </Link>
               </div>
@@ -145,32 +146,32 @@ const Footer = () => {
               </Link>
               <div className="text-white mt-4 d-flex flex-column contact-link">
                 <a href="#" className="pb-3 text-light">
-                  <MdLocationOn size={22} className=" text-white me-2" />
-                  Plot No.9, New AG Colony, Kadru, Ranchi, 834002
+                  <MdLocationOn size={22} className="text-white me-2" />
+                  Plot No.9, New AG Colony, Kadru, Ranchi, 834002
                 </a>
                 <a href="#" className="pb-3 text-light">
-                  <MdLocationOn size={22} className=" text-white me-2" />
+                  <MdLocationOn size={22} className="text-white me-2" />
                   Noida-Sector -51, Near Shivalik Hospital, Noida, 201301
                 </a>
                 <a
                   href="#"
                   className="pb-3 text-light border-bottom border-primary"
                 >
-                  <MdLocationOn size={22} className=" text-white me-2" />
+                  <MdLocationOn size={22} className="text-white me-2" />
                   Hyderabad-Plot No.1, Sai Ram Nagar Colony, Hyderabad, 500079
                 </a>
                 <a
                   href="tel:+91 9122010150"
                   className="py-3 text-light border-bottom border-primary"
                 >
-                  <MdCall size={22} className=" text-white me-2" />
+                  <MdCall size={22} className="text-white me-2" />
                   +91 9122010150
                 </a>
                 <a
                   href="mailto:info@support.com"
                   className="py-3 text-light border-bottom border-primary"
                 >
-                  <MdOutlineEmail size={22} className=" text-white me-2" />
+                  <MdOutlineEmail size={22} className="text-white me-2" />
                   support@symbosys.com
                 </a>
               </div>
@@ -200,15 +201,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-      {/* <a
-        href="#"
-        className="btn btn-primary btn-square rounded-circle back-to-top"
-      >
-        <i className="fa fa-arrow-up text-white"></i>
-      </a> */}
     </>
   );
 };
-
+const footerStyle = {
+  background: "linear-gradient(135deg, #4e54c8, #8f94fb)", // Gradient background
+  color: "#ffffff",
+};
 export default Footer;

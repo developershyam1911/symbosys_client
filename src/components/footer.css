@@ -1,0 +1,16 @@
+.footer {
+    padding: 40px 0; /* Adjusts padding */
+  }
+  
+  .footer .short-link a,
+  .footer .help-link a,
+  .footer .contact-link a {
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .footer .short-link a:hover,
+  .footer .help-link a:hover,
+  .footer .contact-link a:hover {
+    color: #FFD700; /* Change to a different color on hover */
+  }
+  
